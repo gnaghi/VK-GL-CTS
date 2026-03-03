@@ -1,0 +1,8 @@
+dEQP-GLES2.functional.clip_control.depth_mode_one_to_one
+dEQP-GLES2.functional.clip_control.errors
+dEQP-GLES2.functional.clip_control.initial
+dEQP-GLES2.functional.light_amount.1dir
+dEQP-GLES2.functional.light_amount.none
+dEQP-GLES2.functional.multisample.depth
+dEQP-GLES2.functional.multisample.num_samples_polygon
+dEQP-GLES2.functional.multisampled_render_to_texture.readpixels
