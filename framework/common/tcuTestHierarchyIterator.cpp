@@ -76,8 +76,13 @@ void DefaultHierarchyInflater::leaveTestPackage(TestPackage *testPackage)
 
 void DefaultHierarchyInflater::enterGroupNode(TestCaseGroup *testGroup, vector<TestNode *> &children)
 {
+    /* TEMPORARY DEBUG: trace group init to find crash source */
+    printf("[DBG_HIER] entering group '%s'...\n", testGroup->getName());
+    fflush(stdout);
     testGroup->init();
     testGroup->getChildren(children);
+    printf("[DBG_HIER] group '%s' ok (%d children)\n", testGroup->getName(), (int)children.size());
+    fflush(stdout);
 }
 
 void DefaultHierarchyInflater::leaveGroupNode(TestCaseGroup *testGroup)

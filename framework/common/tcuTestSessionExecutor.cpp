@@ -221,10 +221,8 @@ bool TestSessionExecutor::enterTestCase(TestCase *testCase, const std::string &c
     bool initOk = false;
 
     print("\nTest case '%s'..\n", casePath.c_str());
-
-#if (DE_OS == DE_OS_WIN32)
+    /* TEMPORARY DEBUG: flush on all platforms to trace crash */
     fflush(stdout);
-#endif
 
     m_testCtx.setTestResult(QP_TEST_RESULT_LAST, "");
     m_testCtx.setTerminateAfter(false);

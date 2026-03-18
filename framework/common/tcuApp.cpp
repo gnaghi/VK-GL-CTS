@@ -227,6 +227,11 @@ bool App::iterate(void)
 
     // Poll platform events
     const bool platformOk = m_platform.processEvents();
+    if (!platformOk)
+    {
+        printf("[dEQP] FATAL: processEvents() returned false!\n");
+        fflush(stdout);
+    }
 
     // Iterate a step.
     bool testExecOk = false;
@@ -238,6 +243,9 @@ bool App::iterate(void)
         }
         catch (const std::exception &e)
         {
+            /* TEMPORARY DEBUG: print to stdout before die() kills the process */
+            printf("[dEQP] FATAL in App::iterate(): %s\n", e.what());
+            fflush(stdout);
             die("%s", e.what());
         }
     }
