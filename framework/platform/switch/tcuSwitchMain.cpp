@@ -185,7 +185,7 @@ static bool runBatch(tcu::Platform &platform, int batchIndex, int totalBatches,
 	batchArgs[0] = "deqp-gles2";
 	batchArgs[1] = caselistArg;
 	batchArgs[2] = logFilename;
-	batchArgs[3] = "--deqp-archive-dir=sdmc:/switch/";
+	batchArgs[3] = "--deqp-archive-dir=romfs:/";
 	batchArgs[4] = "--deqp-log-images=disable";
 	batchArgs[5] = "--deqp-watchdog=disable";
 
@@ -291,7 +291,7 @@ int main(int argc, char **argv)
 			switchArgs[0] = "deqp-gles2";
 			switchArgs[1] = caselistArg;
 			switchArgs[2] = "--deqp-log-filename=sdmc:/switch/TestResults.qpa";
-			switchArgs[3] = "--deqp-archive-dir=sdmc:/switch/";
+			switchArgs[3] = "--deqp-archive-dir=romfs:/";
 			switchArgs[4] = "--deqp-log-images=disable";
 			switchArgs[5] = "--deqp-watchdog=disable";
 
