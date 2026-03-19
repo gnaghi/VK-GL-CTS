@@ -135,9 +135,12 @@ Platform::~Platform(void)
 
 bool Platform::processEvents(void)
 {
-	// Check if the user wants to quit (HOME button, etc.)
-	// For now, always continue
-	return appletMainLoop();
+	/* appletMainLoop() returns false when the system requests exit
+	 * (HOME button, sleep, or system timeout). appletLockExit() should
+	 * prevent this during test runs, but HOME can still trigger it.
+	 * Return true unconditionally to avoid aborting long test runs. */
+	appletMainLoop();
+	return true;
 }
 
 void Platform::getMemoryLimits(tcu::PlatformMemoryLimits& limits) const
