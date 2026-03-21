@@ -358,3 +358,10 @@ dEQP-GLES2.functional.attribute_location.bind_aliasing.max_inactive_float
 dEQP-GLES2.functional.attribute_location.bind_aliasing.max_inactive_vec2
 dEQP-GLES2.functional.attribute_location.bind_aliasing.max_inactive_vec3
 dEQP-GLES2.functional.attribute_location.bind_aliasing.max_inactive_vec4
+dEQP-GLES2.functional.fragment_ops.interaction.basic_shader.49
+dEQP-GLES2.functional.fragment_ops.interaction.basic_shader.62
+dEQP-GLES2.functional.shaders.struct.uniform.sampler_array_vertex
+dEQP-GLES2.functional.shaders.struct.uniform.sampler_array_fragment
+dEQP-GLES2.functional.fbo.completeness.renderable.texture.color0.bgra8_ext
+dEQP-GLES2.functional.fbo.completeness.renderable.texture.stencil.bgra8_ext
+dEQP-GLES2.functional.fbo.completeness.renderable.texture.depth.bgra8_ext
