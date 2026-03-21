@@ -365,3 +365,4 @@ dEQP-GLES2.functional.shaders.struct.uniform.sampler_array_fragment
 dEQP-GLES2.functional.fbo.completeness.renderable.texture.color0.bgra8_ext
 dEQP-GLES2.functional.fbo.completeness.renderable.texture.stencil.bgra8_ext
 dEQP-GLES2.functional.fbo.completeness.renderable.texture.depth.bgra8_ext
+dEQP-GLES2.functional.uniform_api.random.11
