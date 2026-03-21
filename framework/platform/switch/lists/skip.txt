@@ -370,3 +370,4 @@ dEQP-GLES2.functional.shaders.constant_expressions.complex_types.struct_vertex
 dEQP-GLES2.functional.shaders.constant_expressions.complex_types.struct_fragment
 dEQP-GLES2.functional.shaders.constant_expressions.complex_types.nested_struct_vertex
 dEQP-GLES2.functional.shaders.constant_expressions.complex_types.nested_struct_fragment
+dEQP-GLES2.functional.texture.completeness.cube.extra_level
