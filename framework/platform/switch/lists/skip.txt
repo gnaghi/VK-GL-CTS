@@ -366,3 +366,7 @@ dEQP-GLES2.functional.fbo.completeness.renderable.texture.color0.bgra8_ext
 dEQP-GLES2.functional.fbo.completeness.renderable.texture.stencil.bgra8_ext
 dEQP-GLES2.functional.fbo.completeness.renderable.texture.depth.bgra8_ext
 dEQP-GLES2.functional.uniform_api.random.11
+dEQP-GLES2.functional.shaders.constant_expressions.complex_types.struct_vertex
+dEQP-GLES2.functional.shaders.constant_expressions.complex_types.struct_fragment
+dEQP-GLES2.functional.shaders.constant_expressions.complex_types.nested_struct_vertex
+dEQP-GLES2.functional.shaders.constant_expressions.complex_types.nested_struct_fragment
