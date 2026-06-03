@@ -24,6 +24,7 @@
 #include <csignal>
 #include <switch.h>
 #include <unistd.h>
+#include <GLES2/gl2sgl.h>	/* sglShutdown() — release the GPU on exit */
 
 /* TEMPORARY DEBUG: catch segfaults and print useful info */
 static void crashHandler(int sig)
@@ -326,6 +327,12 @@ int main(int argc, char **argv)
 		fflush(stdout);
 		exitStatus = EXIT_FAILURE;
 	}
+
+	/* The platform (and thus all EGL contexts/displays) is now destroyed, but
+	 * SwitchGLES keeps the deko3d device alive across eglTerminate. Destroy it
+	 * here, while nvservices is still up, so the GPU is released cleanly and a
+	 * relaunch (nxlink without reboot) does not inherit a wedged GPU. */
+	sglShutdown();
 
 	printf("\n[dEQP] ############################################\n");
 	printf("[dEQP] ###    ALL TESTS FINISHED NORMALLY      ###\n");
