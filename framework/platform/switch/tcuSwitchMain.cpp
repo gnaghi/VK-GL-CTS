@@ -26,12 +26,16 @@
 #include <unistd.h>
 #include <GLES2/gl2sgl.h>	/* sglShutdown() — release the GPU on exit */
 
+static const char *s_sglChain = nullptr; /* runner to reload on exit, see main() */
+
 /* TEMPORARY DEBUG: catch segfaults and print useful info */
 static void crashHandler(int sig)
 {
 	const char *sigName = (sig == SIGSEGV) ? "SIGSEGV" : (sig == SIGABRT) ? "SIGABRT" : "SIGNAL";
 	printf("\n[dEQP] *** CRASH: %s (signal %d) ***\n", sigName, sig);
 	fflush(stdout);
+	if (s_sglChain)
+		envSetNextLoad(s_sglChain, s_sglChain);
 	_exit(128 + sig);
 }
 
@@ -211,6 +215,13 @@ static bool runBatch(tcu::Platform &platform, int batchIndex, int totalBatches,
 			if (!app.iterate())
 				break;
 			iterCount++;
+			if (s_sglChain && (iterCount % 32) == 0)
+			{
+				/* runner log on SD: commit it regularly so a hard crash still leaves a
+				 * recent position (every iteration made a full run far too slow) */
+				fflush(stdout);
+				fsync(fileno(stdout));
+			}
 		}
 		printf("[dEQP] Batch %d finished after %d iterations\n", batchIndex + 1, iterCount);
 		fflush(stdout);
@@ -234,7 +245,29 @@ int main(int argc, char **argv)
 	signal(SIGSEGV, crashHandler);
 	signal(SIGABRT, crashHandler);
 
-	initNxLink();
+	/* sgl_lab runner (DekoGL/sgl_lab): --sgl-log FILE sends stdout/stderr to
+	 * FILE, --sgl-chain NRO reloads the runner on exit. Both are removed from
+	 * argv so the sub-batch mode (argc <= 1) still applies. */
+	const char *sglLog = nullptr, *sglChain = nullptr;
+	{
+		int w = 1;
+		for (int i = 1; i < argc; i++)
+		{
+			if (!strcmp(argv[i], "--sgl-log") && i + 1 < argc)
+				sglLog = argv[++i];
+			else if (!strcmp(argv[i], "--sgl-chain") && i + 1 < argc)
+				sglChain = argv[++i];
+			else
+				argv[w++] = argv[i];
+		}
+		argc = w;
+	}
+	s_sglChain = sglChain;
+	if (sglLog && freopen(sglLog, "w", stdout))
+		dup2(fileno(stdout), fileno(stderr));
+
+	if (!sglLog)
+		initNxLink();
 	initRomfs();
 
 	// Set stdout to line-buffered mode
@@ -342,5 +375,8 @@ int main(int argc, char **argv)
 	deinitRomfs();
 	deinitNxLink();
 
+	fflush(stdout);
+	if (sglChain)
+		envSetNextLoad(sglChain, sglChain);
 	return exitStatus;
 }
